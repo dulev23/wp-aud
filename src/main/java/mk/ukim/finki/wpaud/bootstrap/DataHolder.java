@@ -1,7 +1,6 @@
 package mk.ukim.finki.wpaud.bootstrap;
 
 import jakarta.annotation.PostConstruct;
-import lombok.Getter;
 import mk.ukim.finki.wpaud.model.Category;
 import mk.ukim.finki.wpaud.model.Manufacturer;
 import mk.ukim.finki.wpaud.model.Product;
@@ -11,31 +10,34 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Component
 public class DataHolder {
 
-    public static List<Category> categories = new ArrayList<>();
-    public static List<User> users = new ArrayList<>();
-    public static List<Manufacturer> manufacturers = new ArrayList<>();
-    public static List<Product> products = new ArrayList<>();
+    public static List<Category> categories = null;
+    public static List<User> users = null;
+    public static List<Manufacturer> manufacturers = null;
+    public static List<Product> products = null;
 
     @PostConstruct
     public void init() {
-        categories.add(new Category("Software", "Software Category"));
+        categories = new ArrayList<>();
+        categories.add(new Category("Food", "Food Category"));
         categories.add(new Category("Books", "Book Category"));
+        categories.add(new Category("Sports", "Sports Category"));
 
+        users = new ArrayList<>();
         users.add(new User("dulev.nikola", "nd", "Nikola", "Dulev"));
         users.add(new User("atashev", "at", "Aleksandar", "Tashev"));
         users.add(new User("stefan.tagarski", "st", "Stefan", "Tagarski"));
 
-        Manufacturer manufacturer = new Manufacturer("Nike", "New York City, NY");
-        manufacturers.add(manufacturer);
+        manufacturers = new ArrayList<>();
+        manufacturers.add(new Manufacturer("Nike", "USA"));
+        manufacturers.add(new Manufacturer("Coca-Cola", "USA"));
+        manufacturers.add(new Manufacturer("Literatura", "MK"));
 
-        Category category = new Category("Sport", "Sport Category");
-        categories.add(category);
-        products.add(new Product("Ball 1", 235.8, 7, category, manufacturer));
-        products.add(new Product("Ball 2", 236.8, 4, category, manufacturer));
-        products.add(new Product("Ball 3", 237.8, 8, category, manufacturer));
+        products = new ArrayList<>();
+        products.add(new Product("Nike AirForce 1", 235.8, 7, categories.get(0), manufacturers.get(0)));
+        products.add(new Product("Coca-Cola 2L", 2.0, 100, categories.get(1), manufacturers.get(1)));
+        products.add(new Product("A song of Ice and Fire", 20.0, 8, categories.get(2), manufacturers.get(2)));
     }
 }

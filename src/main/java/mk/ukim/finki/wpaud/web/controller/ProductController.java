@@ -19,7 +19,9 @@ public class ProductController {
     private final CategoryService categoryService;
     private final ManufacturerService manufacturerService;
 
-    public ProductController(ProductService productService, CategoryService categoryService, ManufacturerService manufacturerService) {
+    public ProductController(ProductService productService,
+                             CategoryService categoryService,
+                             ManufacturerService manufacturerService) {
         this.productService = productService;
         this.categoryService = categoryService;
         this.manufacturerService = manufacturerService;

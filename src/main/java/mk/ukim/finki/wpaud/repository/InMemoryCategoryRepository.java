@@ -15,21 +15,22 @@ public class InMemoryCategoryRepository {
         return DataHolder.categories;
     }
 
-    public Category save(Category c) {
-        if (c == null || c.getName() == null || c.getName().isEmpty()) {
-            return null;
-        }
+    public Optional<Category> save(Category c) {
         DataHolder.categories.removeIf(category -> category.getName().equals(c.getName()));
         DataHolder.categories.add(c);
-        return c;
+        return Optional.of(c);
     }
 
     public Optional<Category> findByName(String name) {
-        return DataHolder.categories.stream().filter(category -> category.getName().equals(name)).findFirst();
+        return DataHolder.categories.stream()
+                .filter(category -> category.getName().equals(name))
+                .findFirst();
     }
 
     public Optional<Category> findById(Long id) {
-        return DataHolder.categories.stream().filter(category -> category.getId().equals(id)).findFirst();
+        return DataHolder.categories.stream()
+                .filter(category -> category.getId().equals(id))
+                .findFirst();
     }
 
     public List<Category> search(String text) {
@@ -44,5 +45,9 @@ public class InMemoryCategoryRepository {
             return;
         }
         DataHolder.categories.removeIf(category -> category.getName().equals(name));
+    }
+
+    public void deleteById(Long id) {
+        DataHolder.categories.removeIf(category -> category.getId().equals(id));
     }
 }

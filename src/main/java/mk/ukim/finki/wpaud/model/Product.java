@@ -11,7 +11,8 @@ public class Product {
     private Category category;
     private Manufacturer manufacturer;
 
-    public Product(String name, Double price, Integer quantity, Category category, Manufacturer manufacturer) {
+    public Product(String name, Double price, Integer quantity,
+                   Category category, Manufacturer manufacturer) {
         this.id = (long) (Math.random() * 1000);
         this.name = name;
         this.price = price;
@@ -19,6 +20,4 @@ public class Product {
         this.category = category;
         this.manufacturer = manufacturer;
     }
-
-
 }
