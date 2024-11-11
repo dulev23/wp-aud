@@ -28,6 +28,10 @@ public class InMemoryCategoryRepository {
         return DataHolder.categories.stream().filter(category -> category.getName().equals(name)).findFirst();
     }
 
+    public Optional<Category> findById(Long id) {
+        return DataHolder.categories.stream().filter(category -> category.getId().equals(id)).findFirst();
+    }
+
     public List<Category> search(String text) {
         return DataHolder.categories.stream()
                 .filter(category -> category.getName().contains(text) ||
