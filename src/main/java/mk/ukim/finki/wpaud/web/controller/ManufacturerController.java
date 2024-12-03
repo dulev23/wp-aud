@@ -17,12 +17,12 @@ public class ManufacturerController {
     }
 
     @GetMapping
-    public String getManufacturersPage(@RequestParam(required = false) String error, Model model){
-        if(error != null && !error.isEmpty()){
+    public String getManufacturersPage(@RequestParam(required = false) String error, Model model) {
+        if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
-        model.addAttribute("manufacturers",manufacturerService.findAll());
+        model.addAttribute("manufacturers", manufacturerService.findAll());
         return "manufacturers";
     }
 }
