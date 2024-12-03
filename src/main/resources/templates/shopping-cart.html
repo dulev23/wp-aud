@@ -2,7 +2,7 @@
       xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <title>Products</title>
+    <title>Shopping Cart</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -66,14 +66,17 @@
     </nav>
 </header>
 
-
 <div xmlns:th="http://www.thymeleaf.org">
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">WEB PROGRAMMING SHOP</h1>
-            <h3 class="jumbotron-heading">All products</h3>
+            <h3 class="jumbotron-heading">All products in shopping cart</h3>
         </div>
     </section>
+
+    <div th:if="${hasError}">
+        <h5 class="text-center text-danger" th:text="${error}"></h5>
+    </div>
 
     <div class="container mb-4">
         <div class="row">
@@ -82,56 +85,21 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th scope="col">Product name</th>
+                            <th scope="col">Product</th>
                             <th scope="col">Price</th>
                             <th scope="col">Manufacturer</th>
                             <th scope="col">Category</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="product : ${products}" class="product">
+                        <tr th:each="product : ${products}">
                             <td th:text="${product.getName()}"></td>
                             <td th:text="${product.getPrice()}"></td>
-                            <td th:text="${product.getManufacturer() != null}
-                            ? ${product.getManufacturer().getName()} : 'No Manufacturer'"></td>
-                            <td th:text="${product.getCategory() != null}
-                            ? ${product.getCategory().getName()} : 'No Category'"></td>
-                            <td class="text-right">
-                                <th:block>
-                                    <form th:action="@{'/products/delete/{id}' (id=${product.getId()})}"
-                                          th:method="DELETE">
-                                        <button type="submit"
-                                                class="btn btn-sm btn-danger delete-product">
-                                            <i class="fa fa-trash">Delete</i>
-                                        </button>
-                                    </form>
-                                </th:block>
-                                <th:block>
-                                    <a th:href="@{'/products/edit-form/{id}' (id=${product.getId()})}"
-                                       class="btn btn-sm btn-info edit-product">
-                                        <i class="fa fa-trash">Edit</i>
-                                    </a>
-                                </th:block>
-                                <form th:action="@{'/shopping-cart/add-product/{id}' (id=${product.getId()})}"
-                                      th:method="POST">
-                                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-trash">Add
-                                        product
-                                        to cart</i></button>
-                                </form>
-
-                            </td>
+                            <td th:text="${product.getManufacturer() != null} ? ${product.getManufacturer().getName()} : 'No Manufacturer'"></td>
+                            <td th:text="${product.getCategory() != null} ? ${product.getCategory().getName()} : 'No Category'"></td>
                         </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-            <div class="col mb-3">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12">
-                        <a href="/products/add-form" class="btn btn-block btn-dark add-product-btn">
-                            Add new product
-                        </a>
-                    </div>
                 </div>
             </div>
         </div>

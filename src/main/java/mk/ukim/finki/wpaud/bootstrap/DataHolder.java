@@ -1,10 +1,7 @@
 package mk.ukim.finki.wpaud.bootstrap;
 
 import jakarta.annotation.PostConstruct;
-import mk.ukim.finki.wpaud.model.Category;
-import mk.ukim.finki.wpaud.model.Manufacturer;
-import mk.ukim.finki.wpaud.model.Product;
-import mk.ukim.finki.wpaud.model.User;
+import mk.ukim.finki.wpaud.model.*;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -13,10 +10,11 @@ import java.util.List;
 @Component
 public class DataHolder {
 
-    public static List<Category> categories = null;
-    public static List<User> users = null;
-    public static List<Manufacturer> manufacturers = null;
-    public static List<Product> products = null;
+    public static List<Category> categories = new ArrayList<>();
+    public static List<User> users = new ArrayList<>();
+    public static List<Manufacturer> manufacturers = new ArrayList<>();
+    public static List<Product> products = new ArrayList<>();
+    public static List<ShoppingCart> shoppingCarts = new ArrayList<>();
 
     @PostConstruct
     public void init() {
@@ -36,8 +34,8 @@ public class DataHolder {
         manufacturers.add(new Manufacturer("Literatura", "MK"));
 
         products = new ArrayList<>();
-        products.add(new Product("Nike AirForce 1", 235.8, 7, categories.get(0), manufacturers.get(0)));
-        products.add(new Product("Coca-Cola 2L", 2.0, 100, categories.get(1), manufacturers.get(1)));
-        products.add(new Product("A song of Ice and Fire", 20.0, 8, categories.get(2), manufacturers.get(2)));
+        products.add(new Product("Nike AirForce 1", 235.8, 7, categories.get(2), manufacturers.get(0)));
+        products.add(new Product("Coca-Cola 2L", 2.0, 100, categories.get(0), manufacturers.get(1)));
+        products.add(new Product("A song of Ice and Fire", 20.0, 8, categories.get(1), manufacturers.get(2)));
     }
 }
