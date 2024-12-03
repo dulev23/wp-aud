@@ -9,11 +9,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/manufacturers")
-public class ManufacturerController {
+public class ManufacturerRestController {
 
     private final ManufacturerService manufacturerService;
 
-    public ManufacturerController(ManufacturerService manufacturerService) {
+    public ManufacturerRestController(ManufacturerService manufacturerService) {
         this.manufacturerService = manufacturerService;
     }
 
