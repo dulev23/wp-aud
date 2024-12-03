@@ -15,9 +15,10 @@ public class CategoryServiceImplementation implements CategoryService {
     public CategoryServiceImplementation(InMemoryCategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
+
     @Override
     public Optional<Category> create(String name, String description) {
-        if (name == null || name.isEmpty()){
+        if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
         Category c = new Category(name, description);
@@ -26,7 +27,7 @@ public class CategoryServiceImplementation implements CategoryService {
 
     @Override
     public Optional<Category> update(String name, String description) {
-        if (name == null || name.isEmpty()){
+        if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
         Category c = new Category(name, description);
@@ -35,7 +36,7 @@ public class CategoryServiceImplementation implements CategoryService {
 
     @Override
     public void delete(String name) {
-        if(name == null || name.isEmpty()){
+        if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
         categoryRepository.delete(name);
@@ -57,7 +58,7 @@ public class CategoryServiceImplementation implements CategoryService {
     }
 
     @Override
-    public Optional<Category> findById(Long id){
+    public Optional<Category> findById(Long id) {
         return this.categoryRepository.findById(id);
     }
 }

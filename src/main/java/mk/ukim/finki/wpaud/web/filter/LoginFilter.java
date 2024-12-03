@@ -24,10 +24,10 @@ public class LoginFilter implements Filter {
 
         String path = request.getServletPath();
 
-        if (!"/login".equals(path) && !"/register".equals(path) && !"main.css".equals(path) && user==null) {
+        if (!"/login".equals(path) && !"/register".equals(path) && !"main.css".equals(path) && user == null) {
             response.sendRedirect("/login");
         } else {
-            filterChain.doFilter(servletRequest,servletResponse);
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 
