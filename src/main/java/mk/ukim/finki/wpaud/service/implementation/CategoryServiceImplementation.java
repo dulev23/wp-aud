@@ -1,7 +1,7 @@
 package mk.ukim.finki.wpaud.service.implementation;
 
 import mk.ukim.finki.wpaud.model.Category;
-import mk.ukim.finki.wpaud.repository.InMemoryCategoryRepository;
+import mk.ukim.finki.wpaud.repository.jpa.CategoryRepository;
 import mk.ukim.finki.wpaud.service.CategoryService;
 import org.springframework.stereotype.Service;
 
@@ -10,28 +10,30 @@ import java.util.Optional;
 
 @Service
 public class CategoryServiceImplementation implements CategoryService {
-    private final InMemoryCategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
-    public CategoryServiceImplementation(InMemoryCategoryRepository categoryRepository) {
+    public CategoryServiceImplementation(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
     }
 
     @Override
-    public Optional<Category> create(String name, String description) {
+    public Category create(String name, String description) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
         Category c = new Category(name, description);
-        return categoryRepository.save(c);
+        categoryRepository.save(c);
+        return c;
     }
 
     @Override
-    public Optional<Category> update(String name, String description) {
+    public Category update(String name, String description) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
         Category c = new Category(name, description);
-        return categoryRepository.save(c);
+        this.categoryRepository.save(c);
+        return c;
     }
 
     @Override
@@ -39,7 +41,7 @@ public class CategoryServiceImplementation implements CategoryService {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
-        categoryRepository.delete(name);
+        categoryRepository.deleteByName(name);
     }
 
     @Override
@@ -54,7 +56,7 @@ public class CategoryServiceImplementation implements CategoryService {
 
     @Override
     public List<Category> searchCategories(String searchText) {
-        return categoryRepository.search(searchText);
+        return categoryRepository.findAllByNameLike(searchText);
     }
 
     @Override

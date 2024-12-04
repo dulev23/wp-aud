@@ -1,7 +1,7 @@
 package mk.ukim.finki.wpaud.service.implementation;
 
 import mk.ukim.finki.wpaud.model.Manufacturer;
-import mk.ukim.finki.wpaud.repository.InMemoryManufacturerRepository;
+import mk.ukim.finki.wpaud.repository.jpa.ManufacturerRepository;
 import mk.ukim.finki.wpaud.service.ManufacturerService;
 import org.springframework.stereotype.Service;
 
@@ -10,9 +10,9 @@ import java.util.Optional;
 
 @Service
 public class ManufacturerServiceImplementation implements ManufacturerService {
-    private final InMemoryManufacturerRepository manufacturerRepository;
+    private final ManufacturerRepository manufacturerRepository;
 
-    public ManufacturerServiceImplementation(InMemoryManufacturerRepository manufacturerRepository) {
+    public ManufacturerServiceImplementation(ManufacturerRepository manufacturerRepository) {
         this.manufacturerRepository = manufacturerRepository;
     }
 
@@ -28,11 +28,11 @@ public class ManufacturerServiceImplementation implements ManufacturerService {
 
     @Override
     public Optional<Manufacturer> save(String name, String address) {
-        return this.manufacturerRepository.save(name, address);
+        return Optional.of(manufacturerRepository.save(new Manufacturer(name, address)));
     }
 
     @Override
-    public boolean deleteById(long id) {
-        return this.manufacturerRepository.deleteById(id);
+    public void deleteById(long id) {
+        this.manufacturerRepository.deleteById(id);
     }
 }

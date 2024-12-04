@@ -1,6 +1,8 @@
 package mk.ukim.finki.wpaud.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,6 +13,7 @@ import lombok.NoArgsConstructor;
 public class Manufacturer {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -18,7 +21,6 @@ public class Manufacturer {
     private String address;
 
     public Manufacturer(String name, String address) {
-        this.id = (long) (Math.random() * 1000);
         this.name = name;
         this.address = address;
     }
