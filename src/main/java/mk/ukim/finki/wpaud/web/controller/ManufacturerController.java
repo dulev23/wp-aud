@@ -22,7 +22,9 @@ public class ManufacturerController {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
+        model.addAttribute("bodyContent", "manufacturers");
         model.addAttribute("manufacturers", manufacturerService.findAll());
-        return "manufacturers";
+
+        return "master-template";
     }
 }

@@ -34,8 +34,10 @@ public class ProductController {
             model.addAttribute("error", error);
         }
         List<Product> products = this.productService.findAll();
+        model.addAttribute("bodyContent", "products");
         model.addAttribute("products", products);
-        return "products";
+
+        return "master-template";
     }
 
     @DeleteMapping("/delete/{id}")
