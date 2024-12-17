@@ -1,4 +1,4 @@
-<div xmlns:th="http://www.thymeleaf.org">
+<div xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">WEB PROGRAMMING SHOP</h1>
@@ -28,7 +28,7 @@
                             <td th:text="${product.getCategory() != null}
                             ? ${product.getCategory().getName()} : 'No Category'"></td>
                             <td class="text-right">
-                                <th:block>
+                                <th:block sec:authorize="hasRole('ADMIN')">
                                     <form th:action="@{'/products/delete/{id}' (id=${product.getId()})}"
                                           th:method="DELETE">
                                         <button type="submit"
@@ -37,7 +37,7 @@
                                         </button>
                                     </form>
                                 </th:block>
-                                <th:block>
+                                <th:block sec:authorize="hasRole('ADMIN')">
                                     <a th:href="@{'/products/edit-form/{id}' (id=${product.getId()})}"
                                        class="btn btn-sm btn-info edit-product">
                                         <i class="fa fa-trash">Edit</i>
@@ -58,9 +58,11 @@
             <div class="col mb-3">
                 <div class="row">
                     <div class="col-sm-12 col-md-12">
-                        <a href="/products/add-form" class="btn btn-block btn-dark add-product-btn">
-                            Add new product
-                        </a>
+                        <th:block sec:authorize="hasRole('ADMIN')">
+                            <a href="/products/add-form" class="btn btn-block btn-dark add-product-btn">
+                                Add new product
+                            </a>
+                        </th:block>
                     </div>
                 </div>
             </div>

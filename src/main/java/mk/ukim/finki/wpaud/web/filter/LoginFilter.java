@@ -5,10 +5,12 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import mk.ukim.finki.wpaud.model.User;
+import org.springframework.context.annotation.Profile;
 
 import java.io.IOException;
 
 @WebFilter
+@Profile("servlet")
 public class LoginFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -24,7 +26,10 @@ public class LoginFilter implements Filter {
 
         String path = request.getServletPath();
 
-        if (!"/login".equals(path) && !"/register".equals(path) && !"main.css".equals(path) && user == null) {
+        if (!"/login".equals(path) &&
+                !"/register".equals(path) &&
+                !"main.css".equals(path) &&
+                user == null) {
             response.sendRedirect("/login");
         } else {
             filterChain.doFilter(servletRequest, servletResponse);
